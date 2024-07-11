@@ -25,7 +25,7 @@ onMounted(fetchClubs);
     <h1>Test av club tabell</h1>
     <ul>
       <li v-for="club in clubs" :key="club.id">
-        {{ club.ClubName }}
+        {{ club.Stadium }}
       </li>
     </ul>
   </div>

@@ -36,6 +36,28 @@ app.get('/api/clubs', async (req, res) => {
   }
 });
 
+//Rute for players i DB
+app.get('/api/players', async (req, res) => {
+  try {
+    let pool = await sql.connect(config);
+    let result = await pool.request().query('SELECT * FROM [dbo].[tbl_Players]');
+    res.json(result.recordset);
+  } catch (err) {
+    console.error('Databasefeil:', err);
+    res.status(500).json({ error: 'Det oppsto en feil ved tilgang til databasen', details: err.message });
+  }
+})
+
+//Eks rute som håndterer søk basert på spiller navn
+app.get('/api/players', (req, res) => {
+  const query = req.query.name
+
+  //Filtrer spillere basert på navn
+  const filteredPlayers = players.filter(player => player.name.toLowerCase().includes(query.toLocaleLowerCase()))
+
+  res.json(filteredPlayers)
+})
+
 // Rotstirute for velkomstmelding
 app.get('/', (req, res) => {
   res.send('Velkommen til serveren');

@@ -1,14 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
-//import Players from '@/Components/Players.vue'
 //import Test from '@/Components/Test.vue'
-import Test from '../Components/Test.vue';
-//import Players from '../Components/Players.vue';
+import Search from '../Components/Search.vue'
+import PlayerList from '../Components/PlayerList.vue';
 
 const routes = [
   {
-    path: '/test',
-    name: 'Test',
-    component: Test,
+    path: '/search',
+    name: 'Search',
+    component: Search,
+  },
+  {
+    path: '/player/:searchText',
+    name: 'PlayerList',
+    component: PlayerList,
+    props: true,
   },
 ];
 
