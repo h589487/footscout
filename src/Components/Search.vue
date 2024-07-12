@@ -1,6 +1,6 @@
     <script setup >
     import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
+    import { useRouter } from 'vue-router'
 
    
    // const searchQuery = ref(''); //Reaktiv ref som holde en verdi og auto oppdater alle steder som bruker denne ref

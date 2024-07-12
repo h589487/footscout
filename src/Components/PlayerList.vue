@@ -1,5 +1,3 @@
-<!-- PlayerList.vue -->
-
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 import axios from 'axios';
@@ -33,11 +31,11 @@ const filteredPlayers = computed(() => {
 </script>
 
 <template>
-    <h2>Player profiles:</h2>
+    <h2>Player profile:</h2>
     <table>
         <thead>
             <tr>
-                <th>Full Name</th>
+                <th>Full Name </th>
                 <th>Age</th>
                 <th>Nationality</th>
                 <th>Club Name</th>

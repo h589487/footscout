@@ -10,6 +10,10 @@ const routes = [
     component: Search,
   },
   {
+    path: '/discover',
+    redirect: '/search' // Omdiriger fra /home til /search
+  },
+  {
     path: '/player/:searchText',
     name: 'PlayerList',
     component: PlayerList,

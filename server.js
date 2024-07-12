@@ -36,7 +36,7 @@ app.get('/api/clubs', async (req, res) => {
   }
 });
 
-//Rute for players i DB
+//Rute for View om players i DB
 app.get('/api/players', async (req, res) => {
   try {
     let pool = await sql.connect(config);

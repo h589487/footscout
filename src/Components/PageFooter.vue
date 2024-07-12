@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-// No script content needed for now
+
 </script>
 
 <style scoped>
@@ -18,7 +18,7 @@ footer {
   background-color: #001f3f; /* Marineblå farge */
   color: #fff;
   text-align: center;
-  padding: 0.025rem 0.0125rem;
+  padding: 0.0125rem 0.065rem;
   position: fixed;
   width: 100%;
   bottom: 0;

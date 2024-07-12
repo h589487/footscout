@@ -1,7 +1,7 @@
  <script setup>
-import PageHeader from '../src/Components/PageHeader.vue';
-import PageFooter from '../src/Components/PageFooter.vue';
-    </script>
+import PageHeader from '../src/Components/PageHeader.vue'
+import PageFooter from '../src/Components/PageFooter.vue'
+</script>
     
 <template>
   <div id="app">
