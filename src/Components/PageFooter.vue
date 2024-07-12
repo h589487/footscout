@@ -1,3 +1,7 @@
+<script setup>
+    
+</script>
+
 <template>
   <footer>
     <div class="footer-content">
@@ -9,9 +13,6 @@
   </footer>
 </template>
 
-<script setup>
-
-</script>
 
 <style scoped>
 footer {

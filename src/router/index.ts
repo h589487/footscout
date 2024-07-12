@@ -15,7 +15,7 @@ const routes = [
   },
   {
     path: '/player/:searchText',
-    name: 'PlayerList',
+    name: 'PlayerDetails',
     component: PlayerList,
     props: true,
   },

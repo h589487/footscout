@@ -25,7 +25,7 @@
   */
 
   function handleSearch() {
-  router.push({ name: 'PlayerList', params: { searchText: searchText.value } });
+  router.push({ name: 'PlayerDetails', params: { searchText: searchText.value } });
 }
 
     /*
