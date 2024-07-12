@@ -38,7 +38,6 @@
    </script>
 
 <template>
-    <h1>Foot Scout ⚽</h1> 
     <input type="text" v-model="searchText" placeholder="Search players..." /> 
     <button @click="handleSearch" class="search-button">Search></button>
   </template>

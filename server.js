@@ -40,7 +40,7 @@ app.get('/api/clubs', async (req, res) => {
 app.get('/api/players', async (req, res) => {
   try {
     let pool = await sql.connect(config);
-    let result = await pool.request().query('SELECT * FROM [dbo].[tbl_Players]');
+    let result = await pool.request().query('SELECT * FROM viw_Discover_Players');
     res.json(result.recordset);
   } catch (err) {
     console.error('Databasefeil:', err);

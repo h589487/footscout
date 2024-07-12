@@ -24,10 +24,10 @@ onMounted(fetchPlayers);
 watch(() => props.searchText, fetchPlayers);
 
 // Filtrert liste over spillere basert på søketekst
-// Filtreringen fungerer slik at det tar FirstName og på template delen alt annet, for ellers tar søk alt sammen
+// Filtreringen fungerer slik at det tar FullName og på template delen alt annet, for ellers tar søk alt sammen
 const filteredPlayers = computed(() => {
     return players.value.filter(player => {
-        return player.FirstName.toLowerCase().includes(props.searchText.toLowerCase());
+        return player.FullName.toLowerCase().includes(props.searchText.toLowerCase());
     })
 })
 </script>
@@ -37,25 +37,21 @@ const filteredPlayers = computed(() => {
     <table>
         <thead>
             <tr>
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Last Name</th>
-                <th>Date of Birth</th>
+                <th>Full Name</th>
+                <th>Age</th>
                 <th>Nationality</th>
-                <th>Main Position</th>
-                <th>Club</th>
+                <th>Club Name</th>
+                <th>Position Name</th>
                 <th>Market Value</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="player in filteredPlayers" :key="player.id">
-                <td>{{ player.FirstName }}</td>
-                <td>{{ player.MiddleName }}</td>
-                <td>{{ player.LastName }}</td>
-                <td>{{ player.DateOfBirth }}</td>
+                <td>{{ player.FullName }}</td>
+                <td>{{ player.Age }}</td>
                 <td>{{ player.Nationality }}</td>
-                <td>{{ player.MainPosition_id }}</td>
-                <td>{{ player.Club_id }}</td>
+                <td>{{ player.ClubName }}</td>
+                <td>{{ player.PositionName }}</td>
                 <td>{{ player.MarketValue }}</td>
             </tr>
         </tbody>
