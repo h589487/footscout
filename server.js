@@ -1,7 +1,7 @@
 const express = require('express');
 const sql = require('mssql');
 const cors = require('cors');
-require('dotenv').config(); // Last inn miljøvariabler fra .env-filen
+require('dotenv').config();
 
 const app = express();
 const port = 3000;
@@ -9,61 +9,124 @@ const port = 3000;
 // Enable CORS for all requests
 app.use(cors());
 
-// Konfigurer forbindelsesinformasjonen for MSSQL-database
+// Configure database connection
 const config = {
   user: 'Footscout',
   password: 'F00tscout!',
-  server: '192.168.20.50', // IP-adresse eller navnet på SQL-serveren
+  server: '192.168.20.50',
   database: 'FootScoutDB',
   options: {
-    encrypt: false, // Bruk hvis du kjører SQL Server i Azure
-    enableArithAbort: true // Viktig for å unngå potensielle problemer med query execution
-  }
+    encrypt: false,
+    enableArithAbort: true,
+  },
 };
 
-// Middleware for å parse JSON-body
+// Middleware for parsing JSON body
 app.use(express.json());
 
-// Eksempel på en rute som henter data fra MSSQL-databasen
-app.get('/api/clubs', async (req, res) => {
+// Search players with filters
+app.get('/api/players/search', async (req, res) => {
+  const { name, club, position, nationality, ageMin, ageMax, marketValue } = req.query;
+
   try {
     let pool = await sql.connect(config);
-    let result = await pool.request().query('SELECT * FROM [dbo].[tbl_Clubs]');
+    let query = 'SELECT * FROM viw_Discover_Players WHERE 1=1';
+
+    if (name) {
+      query += ` AND FullName LIKE @name`;
+    }
+    if (club) {
+      query += ` AND ClubName LIKE @club`;
+    }
+    if (position) {
+      query += ` AND PositionName LIKE @position`;
+    }
+    if (nationality) {
+      query += ` AND Nationality LIKE @nationality`;
+    }
+    if (ageMin) {
+      query += ` AND Age >= @ageMin`;
+    }
+    if (ageMax) {
+      query += ` AND Age <= @ageMax`;
+    }
+    if (marketValue) {
+      query += ` AND MarketValue LIKE @marketValue`;
+    }
+
+    let request = pool.request();
+    if (name) {
+      request.input('name', sql.NVarChar, `%${name}%`);
+    }
+    if (club) {
+      request.input('club', sql.NVarChar, `%${club}%`);
+    }
+    if (position) {
+      request.input('position', sql.NVarChar, `%${position}%`);
+    }
+    if (nationality) {
+      request.input('nationality', sql.NVarChar, `%${nationality}%`);
+    }
+    if (ageMin) {
+      request.input('ageMin', sql.Int, ageMin);
+    }
+    if (ageMax) {
+      request.input('ageMax', sql.Int, ageMax);
+    }
+    if (marketValue) {
+      request.input('marketValue', sql.NVarChar, `%${marketValue}%`);
+    }
+
+    let result = await request.query(query);
     res.json(result.recordset);
   } catch (err) {
-    console.error('Databasefeil:', err);
-    res.status(500).json({ error: 'Det oppsto en feil ved tilgang til databasen', details: err.message });
+    console.error('Database error:', err);
+    res.status(500).json({ error: 'An error occurred accessing the database', details: err.message });
   }
 });
 
-//Rute for View om players i DB
-app.get('/api/players', async (req, res) => {
+// Fetch unique nationalities
+app.get('/api/filters/nationalities', async (req, res) => {
   try {
     let pool = await sql.connect(config);
-    let result = await pool.request().query('SELECT * FROM viw_Discover_Players');
-    res.json(result.recordset);
-  } catch (err) {
-    console.error('Databasefeil:', err);
-    res.status(500).json({ error: 'Det oppsto en feil ved tilgang til databasen', details: err.message });
+    const result = await pool.request().query('SELECT DISTINCT Nationality FROM viw_Discover_Players');
+    res.json(result.recordset.map(player => player.Nationality));
+  } catch (error) {
+    console.error('Error fetching nationalities:', error);
+    res.status(500).send('Internal Server Error');
   }
-})
+});
 
-//Eks rute som håndterer søk basert på spiller navn
-app.get('/api/players', (req, res) => {
-  const query = req.query.name
+// Fetch unique clubs
+app.get('/api/filters/clubs', async (req, res) => {
+  try {
+    let pool = await sql.connect(config);
+    const result = await pool.request().query('SELECT DISTINCT ClubName FROM viw_Discover_Players');
+    res.json(result.recordset.map(player => player.ClubName));
+  } catch (error) {
+    console.error('Error fetching clubs:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
-  //Filtrer spillere basert på navn
-  const filteredPlayers = players.filter(player => player.name.toLowerCase().includes(query.toLocaleLowerCase()))
+// Fetch unique positions
+app.get('/api/filters/positions', async (req, res) => {
+  try {
+    let pool = await sql.connect(config);
+    const result = await pool.request().query('SELECT DISTINCT PositionName FROM viw_Discover_Players');
+    res.json(result.recordset.map(player => player.PositionName));
+  } catch (error) {
+    console.error('Error fetching positions:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
-  res.json(filteredPlayers)
-})
-
-// Rotstirute for velkomstmelding
+// Root route for welcome message
 app.get('/', (req, res) => {
-  res.send('Velkommen til serveren');
+  res.send('Welcome to the server');
 });
 
-// Start serveren
+// Start the server
 app.listen(port, () => {
-  console.log(`Serveren kjører på http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });

@@ -1,63 +1,50 @@
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
-import axios from 'axios';
+import { defineProps } from 'vue';
 
-// Reaktiv variabel for å holde data
-const props = defineProps(['searchText']);
-const players = ref([]);
-
-const fetchPlayers = async () => {
-    try {
-        const response = await axios.get('http://localhost:3000/api/players', {
-            params: { query: props.searchText }
-        });
-        players.value = response.data;
-    } catch (error) {
-        console.error('Feil ved henting av spillere: ', error);
-    }
-};
-
-// Kjør fetchPlayers når komponenten er montert og når searchText endres
-onMounted(fetchPlayers);
-watch(() => props.searchText, fetchPlayers);
-
-// Filtrert liste over spillere basert på søketekst
-// Filtreringen fungerer slik at det tar FullName og på template delen alt annet, for ellers tar søk alt sammen
-const filteredPlayers = computed(() => {
-    return players.value.filter(player => {
-        return player.FullName.toLowerCase().includes(props.searchText.toLowerCase());
-    })
-})
+// Define props to receive players from the parent component
+const props = defineProps({
+  players: {
+    type: Array,
+    required: true,
+  },
+});
 </script>
 
 <template>
-    <h2>Player profile:</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Full Name </th>
-                <th>Age</th>
-                <th>Nationality</th>
-                <th>Club Name</th>
-                <th>Position Name</th>
-                <th>Market Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="player in filteredPlayers" :key="player.id">
-                <td>{{ player.FullName }}</td>
-                <td>{{ player.Age }}</td>
-                <td>{{ player.Nationality }}</td>
-                <td>{{ player.ClubName }}</td>
-                <td>{{ player.PositionName }}</td>
-                <td>{{ player.MarketValue }}</td>
-            </tr>
-        </tbody>
+  <div>
+    <h2>Player Profile:</h2>
+    <table v-if="players.length">
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Age</th>
+          <th>Nationality</th>
+          <th>Club Name</th>
+          <th>Position Name</th>
+          <th>Market Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="player in players" :key="player.id">
+          <td>{{ player.FullName }}</td>
+          <td>{{ player.Age }}</td>
+          <td>{{ player.Nationality }}</td>
+          <td>{{ player.ClubName }}</td>
+          <td>{{ player.PositionName }}</td>
+          <td>{{ player.MarketValue }}</td>
+        </tr>
+      </tbody>
     </table>
+    <p v-else>No players found.</p>
+  </div>
 </template>
 
 <style scoped>
-/* Scoped styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+ 
 table, th, td {
     border: 1px solid #ddd;
 }

@@ -15,9 +15,10 @@ const routes = [
   },
   {
     path: '/player/:searchText',
-    name: 'PlayerDetails',
+    name: 'PlayerList',
     component: PlayerList,
-    props: true,
+    props: route => ({ state: route.state })
+
   },
 ];
 
