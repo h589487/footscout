@@ -11,13 +11,13 @@ app.use(cors());
 
 // Configure database connection
 const config = {
-  user: 'Footscout',
-  password: 'F00tscout!',
-  server: '192.168.20.50',
+  user: 'JoTo',
+  password: 'HeiHei',
+  server: '192.168.20.43',
   database: 'FootScoutDB',
   options: {
-    encrypt: false,
-    enableArithAbort: true,
+    encrypt: true,
+    trustServerCertificate: true
   },
 };
 

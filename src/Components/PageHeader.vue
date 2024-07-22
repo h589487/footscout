@@ -5,13 +5,13 @@
 <template>
     <header>
         <div class="header-content">
-            <h1>FootScout</h1>
+            <h1>FootScout ⚽</h1>
             <nav>
                 <ul>
                     <li><router-link to="/discover">Discover</router-link></li>
-                    <li><a href="#">Player Profiles</a></li>
+                    <li><router-link to="/playerList">Player Profiles</router-link></li>
                     <li><a href="#">My Profile</a></li>
-                    <li><a href="#">About Us</a></li>
+                    <li><router-link to="/aboutUs">About Us</router-link></li>
                 </ul>
             </nav>
         </div>

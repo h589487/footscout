@@ -14,6 +14,7 @@ const marketValue = ref('');
 const players = ref([]);
 const error = ref('');
 
+//For filtrering
 const nationalities = ref([]);
 const clubs = ref([]);
 const positions = ref([]);

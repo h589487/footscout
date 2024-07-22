@@ -16,7 +16,7 @@
 
 <style scoped>
 footer {
-  background-color: #001f3f; /* Marineblå farge */
+  background-color: #001f3f; 
   color: #fff;
   text-align: center;
   padding: 0.0125rem 0.065rem;
