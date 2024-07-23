@@ -4,6 +4,7 @@ import Search from '../Components/Search.vue'
 import PlayerList from '../Components/PlayerList.vue';
 import AboutUs from '../Components/AboutUs.vue';
 import Discover from '../Components/Discover.vue';
+import Example from '../Components/example.vue';
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     path: '/discover',
     name: 'Discover', // Omdiriger fra /home til /search
     component: Discover
+  },
+  {
+    path: '/example',
+    name: 'example', // Omdiriger fra /home til /search
+    component: Example
   },
   {
     path: '/player/:searchText',

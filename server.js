@@ -30,7 +30,7 @@ app.get('/api/players/search', async (req, res) => {
 
   try {
     let pool = await sql.connect(config);
-    let query = 'SELECT * FROM viw_Discover_Players WHERE 1=1';
+    let query = 'SELECT * FROM viw_Discover_Players WHERE 1=1'; //Where gjør enklere dynamisk spørring, uten å ha ekstra logikk
 
     if (name) {
       query += ` AND FullName LIKE @name`;
