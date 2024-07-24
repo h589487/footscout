@@ -57,62 +57,112 @@ async function fetchFilters() {
 onMounted(fetchFilters);
 </script>
 
-<template> 
+<template>
+  <div class="container">
+    <div class="filters">
+      <div class="filter-dropdowns">
+        <select v-model="position">
+          <option value="">Position</option>
+          <option v-for="pos in positions" :key="pos">{{ pos }}</option>
+        </select>
+        
+        <select v-model="club">
+          <option value="">Club</option>
+          <option v-for="cl in clubs" :key="cl">{{ cl }}</option>
+        </select>
+        
+        <select v-model="nationality">
+          <option value="">Nationality</option>
+          <option v-for="nat in nationalities" :key="nat">{{ nat }}</option>
+        </select>
+      </div>
+
+      <div class="age-slider">
+        <label for="min-age">Min Age:</label>
+        <input type="number" v-model="minAge" id="min-age" placeholder="Min Age" />
+        
+        <label for="max-age">Max Age:</label>
+        <input type="number" v-model="maxAge" id="max-age" placeholder="Max Age" />
+      </div>
+    </div>
+
     <div class="search-bar">
       <input 
         type="text" 
         v-model="searchText" 
-        placeholder="Søk etter spiller"
+        placeholder="Search Player"
       />
-      <button @click="handleSearch">Søk</button>
-    </div>
-
-    <div class="age-filter">
-      <label for="min-age">Min Age:</label>
-      <input type="number" v-model="minAge" id="min-age" placeholder="Min Age" />
-      
-      <label for="max-age">Max Age:</label>
-      <input type="number" v-model="maxAge" id="max-age" placeholder="Max Age" />
-    </div>
-
-    <div class="filter-dropdowns">
-      <select v-model="nationality">
-        <option value="">Select Nationality</option>
-        <option v-for="nat in nationalities" :key="nat" :value="nat">{{ nat }}</option>
-      </select>
-      
-      <select v-model="club">
-        <option value="">Select Club</option>
-        <option v-for="cl in clubs" :key="cl">{{ cl }}</option>
-      </select>
-      
-      <select v-model="position">
-        <option value="">Select Position</option>
-        <option v-for="pos in positions" :key="pos">{{ pos }}</option>
-      </select>
+      <button @click="handleSearch">Search</button>
     </div>
 
     <p v-if="error">{{ error }}</p>
     <PlayerList :players="players" />
+  </div>
 </template>
 
 <style scoped>
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f4f9;
+    padding: 20px;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.filter-dropdowns {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-dropdowns select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.age-slider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.age-slider label {
+    margin-right: 5px;
+}
+
+.age-slider input {
+    width: 80px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 .search-bar {
-    display: auto;
+    display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 0;
+    padding: 10px;
     background-color: #eef;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
 }
 
 .search-bar input {
-    width: 300px;
+    width: 70%;
     padding: 10px;
     margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
- 
+
 .search-bar button {
     padding: 10px 20px;
     background-color: #004080;
@@ -121,9 +171,5 @@ onMounted(fetchFilters);
     cursor: pointer;
     border-radius: 4px;
 }
-
-.filter-dropdowns {
-  margin-right: 10px;
-    padding: 10px;
-}
 </style>
+
