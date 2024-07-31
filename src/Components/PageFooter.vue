@@ -20,7 +20,7 @@ footer {
   color: #fff;
   text-align: center;
   padding: 0.0125rem 0.065rem;
-  position: fixed;
+  position: auto;
   width: 100%;
   bottom: 0;
 }
