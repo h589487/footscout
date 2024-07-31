@@ -1,12 +1,14 @@
  <script setup>
 import PageHeader from '../src/Components/PageHeader.vue'
 import PageFooter from '../src/Components/PageFooter.vue'
+import Discover from './Components/Discover.vue';
 </script>
     
 <template>
   <div id="app">
     <PageHeader />
     <main>
+      <Discover />
       <router-view />
     </main>
     <PageFooter />
