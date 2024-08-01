@@ -4,6 +4,7 @@ import PageFooter from '../src/Components/PageFooter.vue'
 </script>
     
 <template>
+  <!--Legger til PageHeader og PageFooter til hver komponent-->
   <div id="app">
     <PageHeader />
     <main>

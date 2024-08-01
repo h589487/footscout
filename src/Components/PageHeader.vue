@@ -8,10 +8,12 @@
             <h1>FootScout ⚽</h1>
             <nav>
                 <ul>
+                    <!--Klikkbare lenker til å endre til forskjellige sider i applikasjonen-->
                     <li><router-link to="/discover">Discover</router-link></li>
                     <li><router-link to="/playerList">Player Profiles</router-link></li>
                     <li><router-link to="/example">Example</router-link></li>
                     <li><router-link to="/aboutUs">About Us</router-link></li>
+                    <li><router-link to="/FAQ">FAQ</router-link></li>
                 </ul>
             </nav>
         </div>

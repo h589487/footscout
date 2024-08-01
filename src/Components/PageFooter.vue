@@ -16,21 +16,18 @@
 
 <style scoped>
 footer {
-  background-color: #001f3f; 
-  color: #fff;
-  text-align: center;
-  padding: 0.0125rem 0.065rem;
-  position: auto;
-  width: 100%;
-  bottom: 0;
+  background-color: #001f3f; /* Bakgrunnsfarge for footeren */
+  padding: 20px; /* Padding rundt innholdet */
+  color: white; /* Tekstfarge */
 }
+
 .footer-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 0.7rem; /* Mindre skriftstørrelse */
+  display: flex; /* Bruk flexbox til å arrangere innhold horisontalt */
+  justify-content: space-between; /* Fordel innholdet jevnt over tilgjengelig plass */
+  align-items: center; /* Sentere innholdet vertikalt */
 }
+
 .footer-content p {
-  margin: 0.5rem 0;
+  margin: 0 10px; /* Gi litt plass mellom elementene */
 }
 </style>

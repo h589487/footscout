@@ -5,7 +5,10 @@ import PlayerList from '../Components/PlayerList.vue';
 import AboutUs from '../Components/AboutUs.vue';
 import Discover from '../Components/Discover.vue';
 import Example from '../Components/example.vue';
+import FAQ from '../Components/FAQ.vue';
 
+//Merkelig at denne filen er på ts(typescript) 
+//Gjør mulig å omdiregere til forskjellige komponenter
 const routes = [
   {
     path: '/search',
@@ -31,6 +34,11 @@ const routes = [
     path: '/example',
     name: 'example', // Omdiriger fra /home til /search
     component: Example
+  },
+  {
+    path: '/FAQ',
+    name: 'FAQ', // Omdiriger fra /home til /search
+    component: FAQ
   },
   {
     path: '/player/:searchText',

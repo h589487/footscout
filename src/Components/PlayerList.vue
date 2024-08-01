@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps } from 'vue';
 
-// Define props to receive players from the parent component
+// Definer "props" til å motta players fra search komponent. Dette for å dele data mellom komponenter
 const props = defineProps({
   players: {
     type: Array,
@@ -13,6 +13,7 @@ const props = defineProps({
 <template>
   <div>
     <h2>Player Profile:</h2>
+    <!--Sjekk for å sjekke at array ikke er 0, om ikke utfør operasjon-->
     <table v-if="players.length">
       <thead>
         <tr>
@@ -25,6 +26,7 @@ const props = defineProps({
         </tr>
       </thead>
       <tbody>
+        <!--Kjører gjennom tabellen for å legge til player informasjon-->
         <tr v-for="player in players" :key="player.id">
           <td>{{ player.FullName }}</td>
           <td>{{ player.Age }}</td>
@@ -40,6 +42,9 @@ const props = defineProps({
 </template>
 
 <style scoped>
+/*
+Legge til CSS (style) for HTML (template)
+ */
 table {
     width: 100%;
     border-collapse: collapse;
